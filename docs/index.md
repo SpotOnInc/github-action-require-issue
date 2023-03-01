@@ -1,17 +1,30 @@
-# My Project
+# github-action-require-issue
 
-This is what the project is about. Include a brief one-paragraph description that explains what it is and what it should be used for.
+A GitHub action to enforce that a PR has been appropriately linked to a GitHub Issue.
+This can be used for compliance purposes to ensure that code changes are appropriately
+made as a result of an actual request for projects that use GitHub Issues to track
+change requests.
 
-## Installation
+## Installation / Basic Setup
 
-How do we install this thing? Make sure to include code snippets if necessary.
+Include this in your actions file:
+```yaml
+- name: Require linked issue on pull request
+  uses: spotoninc/github-action-require-issue@main
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
 
 !!! note
 
-    This is an example admonition. You can use it to get attention. [Read more here!](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)
+    You will need the following triggers for your action:
+    ```yaml
+    pull_request:
+      types: [edited, synchronize, opened, reopened]
+    ```
 
-## Getting started
+For full usage instructions and examples, see [Usage][usage]
 
-### [➡️ Setup](setup.md)
-### [➡️ Usage](usage.md)
-### [➡️ Reference](reference.md)
+<!-- links -->
+[usage]: usage.md

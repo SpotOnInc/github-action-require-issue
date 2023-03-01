@@ -1,0 +1,35 @@
+{
+  "name": "github-action-require-issue",
+  "version": "0.1.0",
+  "description": "GitHub Action to require a GitHub Issue on a Pull Request",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "tbd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpotOnInc/github-action-require-issue.git"
+  },
+  "keywords": [
+    "actions",
+    "github",
+    "issue",
+    "pr"
+  ],
+  "author": "SpotOn <opensource@spoton.com>",
+  "contributors": [
+    "Brian O'Reilly <boreilly@spoton.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpotOnInc/github-action-require-issue/issues"
+  },
+  "homepage": "https://github.com/SpotOnInc/github-action-require-issue#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1"
+  }
+}

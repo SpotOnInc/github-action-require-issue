@@ -1,12 +1,10 @@
-site_name: "My Project"
+site_name: "github-action-require-issue"
 docs_dir: "docs"
 #site_url: https://example.com/
-#repo_url: "https://github.com/SpotOnInc/my_project"
+repo_url: "https://github.com/SpotOnInc/github-action-require-issue"
 nav:
-    - Home: index.md
-    - Setup: setup.md
-    - Usage: usage.md
-    - Reference: reference.md
+  - Home: index.md
+  - Usage: usage.md
 dev_addr: 127.0.0.1:8383
 
 extra_css:
@@ -15,7 +13,7 @@ extra_css:
 theme:
   name: material
   icon:
-    logo: fontawesome/regular/circle
+    logo: octicons/issue-tracked-in-16
     repo: fontawesome/brands/github
 
   palette:
@@ -30,6 +28,16 @@ theme:
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
+
+  features:
+    # Back to top button
+    - navigation.top
+    # Use instant loading for internal links
+    - navigation.instant
+    # https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#code-annotations
+    - content.code.annotate
+    # Enable copy-to-clipboard button
+    - content.code.copy
 
 markdown_extensions:
   - attr_list

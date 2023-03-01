@@ -1,0 +1,59 @@
+site_name: "My Project"
+docs_dir: "docs"
+#site_url: https://example.com/
+#repo_url: "https://github.com/SpotOnInc/my_project"
+nav:
+    - Home: index.md
+    - Setup: setup.md
+    - Usage: usage.md
+    - Reference: reference.md
+dev_addr: 127.0.0.1:8383
+
+extra_css:
+  - stylesheets/spoton.css
+
+theme:
+  name: material
+  icon:
+    logo: fontawesome/regular/circle
+    repo: fontawesome/brands/github
+
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+  - mkdocstrings
+  - minify:
+      minify_html: true

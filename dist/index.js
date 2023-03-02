@@ -556,8 +556,8 @@ class OidcClient {
             const res = yield httpclient
                 .getJson(id_token_url)
                 .catch(error => {
-                throw new Error(`Failed to get ID Token. \n
-        Error Code : ${error.statusCode}\n
+                throw new Error(`Failed to get ID Token. \n 
+        Error Code : ${error.statusCode}\n 
         Error Message: ${error.result.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
@@ -9597,6 +9597,118 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 2076:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "checkLinkedIssues": () => (/* binding */ checkLinkedIssues),
+/* harmony export */   "fail": () => (/* binding */ fail),
+/* harmony export */   "generateUrlRegex": () => (/* binding */ generateUrlRegex),
+/* harmony export */   "getLinkedIssues": () => (/* binding */ getLinkedIssues),
+/* harmony export */   "verifyIssue": () => (/* binding */ verifyIssue),
+/* harmony export */   "verifyLinkedIssues": () => (/* binding */ verifyLinkedIssues)
+/* harmony export */ });
+const core = __nccwpck_require__(2186)
+const github = __nccwpck_require__(5438)
+
+const ISSUE_REGEX = /#\d+/g
+
+function fail (message) {
+  core.setFailed(message)
+}
+
+async function generateUrlRegex (context) {
+  const { owner, repo } = context.repo
+  return new RegExp(`https://github.com/${owner}/${repo}/issues/(\\d+)`, 'g')
+}
+
+async function getLinkedIssues (body, context) {
+  // extract possible issue keys from PR body
+  let matches = body.match(ISSUE_REGEX)
+  if (!matches) matches = []
+  core.debug(`Found matches from PR body: ${matches}`)
+  // strip array to just the integer id #s, no extra characters
+  matches = matches.map(x => x.replace(/^#/, '').trim())
+  // extract possible issue links (urls) from PR body
+  const urlRegex = await generateUrlRegex(context)
+  const urlMatches = body.matchAll(urlRegex)
+  for (const match of urlMatches) {
+    // pull the capture group, which should be the issue #
+    const possibleIssue = match[1]
+    core.debug(`URL match found: ${possibleIssue}`)
+    if (!matches.includes(possibleIssue)) {
+      // append url-match issue keys too
+      matches.push(possibleIssue)
+    }
+  }
+  core.debug(`All possible matches: ${matches}`)
+  // fail if none are found
+  if (!matches.length) {
+    fail('No issue tags or links found.')
+  }
+  return matches
+}
+
+async function verifyIssue (match, context) {
+  try {
+    const githubToken = core.getInput('github_token')
+    const octokit = github.getOctokit(githubToken)
+    const issue = await octokit.rest.issues.get({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      issue_number: match
+    })
+    // verify issue exists and data.number matches (just to be extra paranoid)
+    if (issue && parseInt(match) === issue.data.number) {
+      core.debug(`#${match} is a valid issue on this repo.`)
+      const { state: issueState } = issue.data
+      // if valid_state has been defined, use it to check the state
+      const validState = core.getInput('valid_issue_state')
+      if (!validState) {
+        return true
+      } else if (validState && typeof issueState === 'string') {
+        core.debug(`Need to check valid state: ${validState}`)
+        core.debug(`Comparing ${validState} to ${issueState}`)
+        if (validState === issueState) {
+          return true
+        }
+      } else {
+        core.warning(`${validState} is not a valid string`)
+        return false
+      }
+    }
+  } catch {
+    core.debug(`#${match} is not a valid issue on this repo.`)
+    return false
+  }
+}
+
+async function verifyLinkedIssues (matches, context) {
+  // verify that any possible issue keys are actual issue keys via GitHub API
+  for (const match of matches) {
+    core.debug(`Checking to see if ${match} is a valid issue.`)
+    const isValid = await verifyIssue(match, context)
+    if (isValid) return true
+  }
+  // no valid matches found
+  return false
+}
+
+async function checkLinkedIssues (body, context) {
+  const matches = await getLinkedIssues(body, context)
+  if (matches) {
+    const validMatches = await verifyLinkedIssues(matches, context)
+    if (!validMatches) {
+      fail('No valid issue tags/links found.')
+    }
+  }
+}
+
+
+/***/ }),
+
 /***/ 2877:
 /***/ ((module) => {
 
@@ -9737,7 +9849,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __nccwpck_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -9751,7 +9863,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		var threw = true;
 /******/ 		try {
@@ -9760,11 +9872,11 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 		} finally {
 /******/ 			if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -9777,12 +9889,12 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -9793,121 +9905,18 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
-/******/
+/******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
-/******/
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   "checkLinkedIssues": () => (/* binding */ checkLinkedIssues),
-/* harmony export */   "generateUrlRegex": () => (/* binding */ generateUrlRegex),
-/* harmony export */   "getLinkedIssues": () => (/* binding */ getLinkedIssues),
-/* harmony export */   "main": () => (/* binding */ main),
-/* harmony export */   "verifyIssue": () => (/* binding */ verifyIssue),
-/* harmony export */   "verifyLinkedIssues": () => (/* binding */ verifyLinkedIssues)
-/* harmony export */ });
 const core = __nccwpck_require__(2186)
 const github = __nccwpck_require__(5438)
-
-const validState = core.getInput('valid_issue_state')
-const githubToken = core.getInput('github_token')
-const octokit = github.getOctokit(githubToken)
-
-const ISSUE_REGEX = /#\d+/g
-
-function fail (message) {
-  core.setFailed(message)
-}
-
-async function generateUrlRegex (context) {
-  const { owner, repo } = context.repo
-  return new RegExp(`https://github.com/${owner}/${repo}/issues/(\\d+)`, 'g')
-}
-
-async function getLinkedIssues (body, context) {
-  // extract possible issue keys from PR body
-  let matches = body.match(ISSUE_REGEX)
-  if (!matches) matches = []
-  core.debug(`Found matches from PR body: ${matches}`)
-  // strip array to just the integer id #s, no extra characters
-  matches = matches.map(x => x.replace(/^#/, '').trim())
-  // extract possible issue links (urls) from PR body
-  const urlRegex = await generateUrlRegex(context)
-  const urlMatches = body.matchAll(urlRegex)
-  for (const match of urlMatches) {
-    // pull the capture group, which should be the issue #
-    const possibleIssue = match[1]
-    core.debug(`URL match found: ${possibleIssue}`)
-    if (!matches.includes(possibleIssue)) {
-      // append url-match issue keys too
-      matches.push(possibleIssue)
-    }
-  }
-  core.debug(`All possible matches: ${matches}`)
-  // fail if none are found
-  if (!matches.length) {
-    fail('No issue tags or links found.')
-  }
-  return matches
-}
-
-async function verifyIssue (match, context) {
-  try {
-    const issue = await octokit.rest.issues.get({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      issue_number: match
-    })
-    // verify issue exists and data.number matches (just to be extra paranoid)
-    if (issue && parseInt(match) === issue.data.number) {
-      core.debug(`#${match} is a valid issue on this repo.`)
-      const { state: issueState } = issue.data
-      // if valid_state has been defined, use it to check the state
-      if (!validState) {
-        return true
-      } else if (validState && typeof issueState === 'string') {
-        core.debug(`Need to check valid state: ${validState}`)
-        core.debug(`Comparing ${validState} to ${issueState}`)
-        if (validState === issueState) {
-          return true
-        }
-      } else {
-        core.warning(`${validState} is not a valid string`)
-        return false
-      }
-    }
-  } catch {
-    core.debug(`#${match} is not a valid issue on this repo.`)
-    return false
-  }
-}
-
-async function verifyLinkedIssues (matches, context) {
-  // verify that any possible issue keys are actual issue keys via GitHub API
-  for (const match of matches) {
-    core.debug(`Checking to see if ${match} is a valid issue.`)
-    const isValid = await verifyIssue(match, context)
-    if (isValid) return true
-  }
-  // no valid matches found
-  return false
-}
-
-async function checkLinkedIssues (body, context) {
-  const matches = await getLinkedIssues(body, context)
-  if (matches) {
-    const validMatches = await verifyLinkedIssues(matches, context)
-    if (!validMatches) {
-      fail('No valid issue tags/links found.')
-    }
-  }
-}
+const { checkLinkedIssues, fail } = __nccwpck_require__(2076)
 
 async function main (context) {
   try {

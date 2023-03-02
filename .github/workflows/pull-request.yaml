@@ -26,4 +26,5 @@ jobs:
 
       - name: Run pre-commit on pull-request too to enforce rules
         uses: pre-commit/action@v3.0.0
-        extra_args: --all-files --color=always --show-diff-on-failure
+        with:
+          extra_args: --all-files --color=always --show-diff-on-failure

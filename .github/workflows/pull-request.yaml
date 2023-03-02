@@ -20,9 +20,9 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Run pre-commit on pull-request too to enforce rules
-        uses: pre-commit/action@v3.0.0
-
       # run tests
       - run: npm install
       - run: npm run all
+
+      - name: Run pre-commit on pull-request too to enforce rules
+        uses: pre-commit/action@v3.0.0

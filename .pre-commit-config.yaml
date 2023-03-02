@@ -1,4 +1,4 @@
-exclude: '.git,node_modules,dist'
+exclude: '.git|node_modules|dist'
 fail_fast: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -21,14 +21,11 @@ repos:
     rev: v8.35.0
     hooks:
       - id: eslint
-        exclude: node_modules
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.33.0
     hooks:
       - id: markdownlint
-        exclude: node_modules
-        args: ['--fix', "docs/**/*.md", "*.md"]
 
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.29.0

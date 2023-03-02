@@ -8,6 +8,7 @@ change requests.
 ## Installation / Basic Setup
 
 Include this in your actions file:
+
 ```yaml
 - name: Require linked issue on pull request
   uses: spotoninc/github-action-require-issue@main
@@ -15,14 +16,12 @@ Include this in your actions file:
     github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+Note: You will need the following triggers for your action:
 
-!!! note
-
-    You will need the following triggers for your action:
-    ```yaml
-    pull_request:
-      types: [edited, synchronize, opened, reopened]
-    ```
+```yaml
+pull_request:
+  types: [edited, synchronize, opened, reopened]
+```
 
 For full usage instructions and examples, see [Usage][usage]
 

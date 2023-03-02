@@ -1,6 +1,6 @@
 # Usage
 
-## Full usage example:
+## Full usage example
 
 ```yaml
 name: pull-request

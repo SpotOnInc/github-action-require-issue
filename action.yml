@@ -4,7 +4,9 @@ inputs:
   github_token:
     description: "A GitHub Token that can be used to authenticate to the GitHub API"
   valid_issue_states:
-    description: "A list or string of issue states to consider as valid (i.e. to only count open for example)"
+    description: |
+      A list or string of issue states to consider as valid
+      (i.e. to only count open for example)
 runs:
   using: "node16"
   main: "src/index.js"

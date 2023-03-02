@@ -1,0 +1,19 @@
+# Source: https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
+
+# Default state for all rules
+default: true
+
+# MD013/line-length - Line length
+MD013:
+  # NOTE: explicitly setting the value for line_length here to 88 characters.
+  #       A line length of 88 characters may seem short (note: 80 is the default),
+  #       but it helps maintain accessible and readable code and documentation.
+  #       Accessibility is important at SpotOn. Please do not override this setting.
+  line_length: 88
+  heading_line_length: 88
+  code_block_line_length: 88
+
+# MD029/ol-prefix - Ordered list item prefix
+MD029:
+  # List style
+  style: "one"

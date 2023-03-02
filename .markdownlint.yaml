@@ -12,8 +12,3 @@ MD013:
   line_length: 88
   heading_line_length: 88
   code_block_line_length: 88
-
-# MD029/ol-prefix - Ordered list item prefix
-MD029:
-  # List style
-  style: "one"

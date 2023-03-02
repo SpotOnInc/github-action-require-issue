@@ -1,4 +1,4 @@
-exclude: '.git,node_modules'
+exclude: '.git,node_modules,dist'
 fail_fast: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -10,6 +10,7 @@ repos:
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: check-added-large-files
+        exclude: dist
       - id: check-symlinks
       - id: check-yaml
       - id: check-json

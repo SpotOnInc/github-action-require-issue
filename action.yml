@@ -9,4 +9,4 @@ inputs:
       (i.e. to only count open for example)
 runs:
   using: "node16"
-  main: "src/index.js"
+  main: "dist/index.js"

@@ -1,4 +1,4 @@
-# My Project
+# github-action-require-issue
 
 GitHub action to enforce that a PR has been appropriately linked to a GitHub Issue.
 

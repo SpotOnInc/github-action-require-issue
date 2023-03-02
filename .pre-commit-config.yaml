@@ -3,6 +3,7 @@ fail_fast: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
+    exclude: dist
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -10,7 +11,6 @@ repos:
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: check-added-large-files
-        exclude: dist
       - id: check-symlinks
       - id: check-yaml
       - id: check-json

@@ -2,7 +2,7 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 const { checkLinkedIssues, fail } = require('./methods')
 
-async function main (context) {
+export async function main (context) {
   try {
     // check if this is actually a PR
     const pullRequest = context.payload.pull_request

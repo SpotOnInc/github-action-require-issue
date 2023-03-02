@@ -2,7 +2,7 @@ name: "GitHub Issue Check"
 description: "Check to see if a GitHub Issue is linked to a PR and fail if not."
 inputs:
   github_token:
-    description: "A GitHun Token that can be used to authenticate to the GitHub API"
+    description: "A GitHub Token that can be used to authenticate to the GitHub API"
   valid_issue_states:
     description: "A list or string of issue states to consider as valid (i.e. to only count open for example)"
 runs:

@@ -1,0 +1,28 @@
+name: pull-request
+
+on:
+  pull_request:
+    types: [edited, synchronize, opened, reopened]
+
+jobs:
+  checks:
+    name: Perform required PR checks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      # TODO: enable this after release
+      #      - name: Require linked issue on pull request
+      #        uses: spotoninc/github-action-require-issue@main
+      #        with:
+      #          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #          valid_issue_state: open
+
+      - uses: actions/checkout@v3
+
+      - name: Run pre-commit on pull-request too to enforce rules
+        uses: pre-commit/action@v3.0.0
+
+      # run tests
+      - run: npm install
+      - run: npm run all

@@ -1,4 +1,7 @@
 import * as methods from '../src/methods'
+import * as github from '@actions/github'
+
+jest.mock('@actions/github')
 
 describe('business logic', () => {
   let context
@@ -10,6 +13,46 @@ describe('business logic', () => {
       }
     }
   })
+
+  describe('verifyIssue', () => {
+    const mockGithubRestClient = {
+      rest: {
+        issues: {
+          get: jest.fn()
+        }
+      }
+    }
+    beforeEach(() => {
+      jest.resetAllMocks()
+      github.getOctokit.mockReturnValue(mockGithubRestClient)
+    })
+
+    it('should return false when there are not linked issues', async () => {
+      const match = 'does not matter'
+      mockGithubRestClient.rest.issues.get.mockResolvedValueOnce({})
+      const actual = await methods.verifyIssue(match, context)
+      expect(actual).toBeFalsy()
+    })
+
+    it('should successfully match an item', async () => {
+      // arrange
+      const match = '1'
+      const state = 'foo'
+      mockGithubRestClient.rest.issues.get.mockResolvedValueOnce({
+        data: {
+          number: parseInt(match),
+          state
+        }
+      })
+      process.env.INPUT_VALID_ISSUE_STATE = state
+
+      // act
+      const actual = await methods.verifyIssue(match, context)
+      // assert
+      expect(actual).toBeTruthy()
+    })
+  })
+
   it('should generate valid url regex', async () => {
     await expect(methods.generateUrlRegex(context)).resolves.toStrictEqual(
       /https:\/\/github.com\/spotoninc\/example\/issues\/(\d+)/g

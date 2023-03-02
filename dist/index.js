@@ -9679,7 +9679,7 @@ async function verifyIssue (match, context) {
         return false
       }
     }
-  } catch {
+  } catch (err) {
     core.debug(`#${match} is not a valid issue on this repo.`)
     return false
   }

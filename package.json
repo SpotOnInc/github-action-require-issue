@@ -39,6 +39,7 @@
     "@babel/core": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@octokit/fixtures": "^22.0.6",
+    "@types/jest": "^29.4.0",
     "@vercel/ncc": "^0.36.1",
     "babel-jest": "^29.4.3",
     "eslint": "^8.35.0",

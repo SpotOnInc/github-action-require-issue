@@ -1,0 +1,38 @@
+name: pull-request
+
+on:
+  pull_request:
+    types: [edited, synchronize, opened, reopened]
+
+jobs:
+  checks:
+    name: Perform required PR checks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      # TODO: enable this after release for self-referential fun!
+      #      - name: Require linked issue on pull request
+      #        uses: spotoninc/github-action-require-issue@main
+      #        with:
+      #          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #          valid_issue_state: open
+
+      - uses: actions/checkout@v3
+
+      # install deps
+      - run: npm install
+
+      - name: Run pre-commit on pull-request too to enforce rules
+        uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: --all-files --color=always --show-diff-on-failure
+
+      # run tests and coverage analysis
+      - run: npm run coverage
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -1,0 +1,33 @@
+exclude: '.git|node_modules|dist'
+fail_fast: false
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    exclude: dist
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-symlinks
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: forbid-submodules
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.35.0
+    hooks:
+      - id: eslint
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.33.0
+    hooks:
+      - id: markdownlint
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.29.0
+    hooks:
+      - id: yamllint

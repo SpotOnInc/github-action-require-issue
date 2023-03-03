@@ -1,0 +1,6 @@
+extends: default
+
+rules:
+  # 88 chars, see note in .markdownlint.yaml for more details
+  line-length:
+    max: 88

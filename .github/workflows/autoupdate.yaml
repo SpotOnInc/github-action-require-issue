@@ -15,8 +15,8 @@ jobs:
         env:
           MERGE_CONFLICT_ACTION: "ignore"
           PR_FILTER: "auto_merge"
-          # By using this token instead of GITHUB_TOKEN, it should trigger other workflows
-          # after it.
+          # By using this token instead of GITHUB_TOKEN, it should trigger other
+          # workflows after it.
           #
           # ************
           #   CAUTION

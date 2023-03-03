@@ -1,2 +1,3 @@
 .docsvenv
 node_modules
+coverage

@@ -56,7 +56,7 @@ export async function verifyIssue (match, context) {
       const validState = core.getInput('valid_issue_state')
       if (!validState) {
         return true
-      } else if (validState && typeof issueState === 'string') {
+      } else if (validState && typeof validState === 'string') {
         core.debug(`Need to check valid state: ${validState}`)
         core.debug(`Comparing ${validState} to ${issueState}`)
         if (validState === issueState) {
@@ -86,10 +86,12 @@ export async function verifyLinkedIssues (matches, context) {
 
 export async function checkLinkedIssues (body, context) {
   const matches = await getLinkedIssues(body, context)
-  if (matches) {
+  if (matches.length) {
     const validMatches = await verifyLinkedIssues(matches, context)
     if (!validMatches) {
       fail('No valid issue tags/links found.')
     }
+    return validMatches
   }
+  return false
 }

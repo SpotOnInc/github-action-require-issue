@@ -11,12 +11,11 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      # TODO: enable this after release for self-referential fun!
-      #      - name: Require linked issue on pull request
-      #        uses: spotoninc/github-action-require-issue@main
-      #        with:
-      #          github_token: ${{ secrets.GITHUB_TOKEN }}
-      #          valid_issue_state: open
+      - name: Require linked issue on pull request
+        uses: spotoninc/github-action-require-issue@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          valid_issue_state: open
 
       - uses: actions/checkout@v3
 

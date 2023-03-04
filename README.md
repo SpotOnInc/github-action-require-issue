@@ -6,7 +6,7 @@ GitHub action to enforce that a PR has been appropriately linked to a GitHub Iss
 
 ```yaml
     - name: Require linked issue on pull request
-      uses: spotoninc/github-action-require-issue@main
+      uses: spotoninc/github-action-require-issue@v1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
 ```

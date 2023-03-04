@@ -6,7 +6,7 @@ inputs:
   valid_issue_state:
     description: |
       An issue state to consider as valid
-      (i.e. to only count open for example)
+      (e.g. to only count open issues)
 runs:
   using: "node16"
   main: "dist/index.js"

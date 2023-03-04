@@ -3,9 +3,9 @@ description: "Check to see if a GitHub Issue is linked to a PR and fail if not."
 inputs:
   github_token:
     description: "A GitHub Token that can be used to authenticate to the GitHub API"
-  valid_issue_states:
+  valid_issue_state:
     description: |
-      A list or string of issue states to consider as valid
+      An issue state to consider as valid
       (i.e. to only count open for example)
 runs:
   using: "node16"

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Require linked issue on PR
-        uses: spotoninc/github-action-require-issue@v1
+        uses: spotoninc/github-action-require-issue@v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -29,7 +29,7 @@ issue, you can add the `valid_issue_state` input and :
 
 ```yaml
 - name: Require linked issue on PR
-  uses: spotoninc/github-action-require-issue@v1
+  uses: spotoninc/github-action-require-issue@v1.0.0
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     valid_issue_state: open

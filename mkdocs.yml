@@ -12,8 +12,10 @@ extra_css:
 
 theme:
   name: material
+  font:
+    text: Poppins
   icon:
-    logo: octicons/issue-tracked-in-16
+    logo: octicons/issue-tracked-by-16
     repo: fontawesome/brands/github
 
   palette:

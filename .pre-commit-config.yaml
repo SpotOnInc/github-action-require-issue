@@ -12,6 +12,7 @@ repos:
       - id: check-added-large-files
       - id: check-symlinks
       - id: check-yaml
+        args: [--unsafe]
       - id: check-json
       - id: check-toml
       - id: forbid-submodules

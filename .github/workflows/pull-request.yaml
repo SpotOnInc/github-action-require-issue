@@ -3,6 +3,9 @@ name: pull-request
 on:
   pull_request:
     types: [edited, synchronize, opened, reopened]
+    push:
+      branches:
+        - 'main'
 
 jobs:
   checks:

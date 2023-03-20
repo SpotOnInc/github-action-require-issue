@@ -11,7 +11,7 @@ Include this in your actions file:
 
 ```yaml
 - name: Require linked issue on pull request
-  uses: spotoninc/github-action-require-issue@v1.0.0
+  uses: spotoninc/github-action-require-issue@v1
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
 ```

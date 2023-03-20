@@ -4,6 +4,7 @@ on:
 
 jobs:
   create-tag:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Create generic version tag based on release tag
@@ -11,9 +12,9 @@ jobs:
           echo "tag_name=$(echo ${{ github.ref_name }} | sed -E 's/^(v[0-9]+)\.[0-9]+\.[0-9]+$/\1/')" >> $GITHUB_ENV
       - uses: actions/checkout@v3
       - name: Create generic tag
-        uses: negz/create-tag@v1
+        uses: rickstaa/action-create-tag@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          git_commit_sha: ${{ github.sha }}
-          version: ${{ env.tag_name }}
+          commit_sha: ${{ github.sha }}
+          tag: ${{ env.tag_name }}
+          force_push_tag: true
 

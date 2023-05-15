@@ -24,4 +24,8 @@ export async function main (context) {
   }
 }
 
-main(github.context).then(() => { core.info('Action complete') })
+main(github.context).then(() => {
+  core.info('Action complete')
+}).catch(() => {
+  fail('Error detected')
+})

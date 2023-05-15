@@ -164,8 +164,8 @@ describe('business logic', () => {
 
   it('should generate valid url regex', async () => {
     methods.generateUrlRegex(context).then(regex => {
-      const match = '/https:\\/\\/github.com\\/SpotOnInc\\/example\\/issues\\/(\\d+)/g'
-      expect(regex.toString() === match)
+      const match = '/https:\\/\\/github.com\\/spotoninc\\/example\\/issues\\/(\\d+)/g'
+      expect(regex.toString()).toStrictEqual(match)
     })
   })
 

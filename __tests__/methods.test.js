@@ -164,7 +164,7 @@ describe('business logic', () => {
 
   it('should generate valid url regex', async () => {
     await expect(methods.generateUrlRegex(context)).resolves.toStrictEqual(
-      /https:\/\/github.com\/spotoninc\/example\/issues\/(\d+)/g
+      /^https:\/\/github.com\/spotoninc\/example\/issues\/(\d+)$/g
     )
   })
 

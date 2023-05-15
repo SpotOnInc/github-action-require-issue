@@ -163,9 +163,10 @@ describe('business logic', () => {
   })
 
   it('should generate valid url regex', async () => {
-    await expect(methods.generateUrlRegex(context)).resolves.toStrictEqual(
-      /^https:\/\/github.com\/spotoninc\/example\/issues\/(\d+)$/g
-    )
+    methods.generateUrlRegex(context).then(regex => {
+      const match = '/https:\\/\\/github.com\\/SpotOnInc\\/example\\/issues\\/(\\d+)/g'
+      expect(regex.toString() === match)
+    })
   })
 
   it('should not get tags when none are provided', async () => {

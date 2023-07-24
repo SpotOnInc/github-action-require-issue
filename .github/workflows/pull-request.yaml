@@ -8,9 +8,24 @@ on:
         - 'main'
 
 jobs:
+  verify-not-dependabot:
+    name: Check for Dependabot
+    runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.dependacheck.outputs.status }}
+    steps:
+      - name: Who goes there?
+        id: dependacheck
+        run: |
+          [[ "${{github.actor}}" == "dependabot[bot]" ]] && status="skip" || status="check"
+          echo $status
+          echo "status=$status" >> $GITHUB_OUTPUT
+
   checks:
     name: Perform required PR checks
     runs-on: ubuntu-latest
+    needs: verify-not-dependabot
+    if: needs.verify-not-dependabot.outputs.status == 'check'
     strategy:
       fail-fast: false
     steps:

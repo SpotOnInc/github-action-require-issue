@@ -21,8 +21,8 @@ jobs:
           echo $status
           echo "status=$status" >> $GITHUB_OUTPUT
 
-  checks:
-    name: Perform required PR checks
+  pr_label:
+    name: Verify linked issue on PR
     runs-on: ubuntu-latest
     needs: verify-not-dependabot
     if: needs.verify-not-dependabot.outputs.status == 'check'
@@ -35,6 +35,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           valid_issue_state: open
 
+  checks:
+    name: Perform required PR checks
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v3
 
       # install deps

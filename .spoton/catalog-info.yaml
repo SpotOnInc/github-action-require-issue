@@ -5,7 +5,7 @@ metadata:
   name: github-action-require-issue
   description: GitHub Action to require a GitHub Issue on a Pull Request
   annotations:
-    github.com/project-slug: SpotOnInc/GitHub Action to require a GitHub Issue on a Pull Request
+    github.com/project-slug: GitHub Action to require a GitHub Issue on a Pull Request
     #backstage.io/techdocs-ref: dir:.
   tags:
     - github
@@ -13,6 +13,6 @@ metadata:
     - GHA
 
 spec:
-  type: library  
+  type: library
   owner: open-source
   lifecycle: production

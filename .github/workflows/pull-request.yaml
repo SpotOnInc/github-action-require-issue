@@ -52,8 +52,5 @@ jobs:
       # run tests and coverage analysis
       - run: npm run coverage
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Jest Coverage Comment
+        uses: MishaKav/jest-coverage-comment@main

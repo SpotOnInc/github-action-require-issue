@@ -1,0 +1,18 @@
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: github-action-require-issue
+  description: GitHub Action to require a GitHub Issue on a Pull Request
+  annotations:
+    github.com/project-slug: SpotOnInc/GitHub Action to require a GitHub Issue on a Pull Request
+    #backstage.io/techdocs-ref: dir:.
+  tags:
+    - github
+    - github-actions
+    - GHA
+
+spec:
+  type: library  
+  owner: open-source
+  lifecycle: production

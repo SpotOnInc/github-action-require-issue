@@ -10,7 +10,7 @@
     "lint": "eslint src/**/*.js",
     "prepare": "ncc build src/index.js -o dist --source-map --license licenses.txt",
     "test": "jest",
-    "coverage": "jest --coverage",
+    "coverage": "jest --coverage --coverageReporters=\"json-summary\"",
     "all": "npm run lint && npm run prepare && npm run test"
   },
   "repository": {

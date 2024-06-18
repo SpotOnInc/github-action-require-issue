@@ -7,6 +7,7 @@ metadata:
   annotations:
     github.com/project-slug: GitHub Action to require a GitHub Issue on a Pull Request
     #backstage.io/techdocs-ref: dir:.
+    spoton.com/domain: domain:default/payments
   tags:
     - github
     - github-actions
